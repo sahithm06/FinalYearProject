@@ -1,0 +1,119 @@
+.inputBox input {
+            width: 100%;
+            padding: 15px 0 0 0;
+            font-size: 16px;
+            color: black;
+            letter-spacing: 1;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid black;
+            outline: none;
+            background: transparent;
+        }
+        .inputBox label {
+            position: absolute;
+            top: 0;
+            left: 10px;
+            padding: 10px 0;
+            font-size: 16px;
+            color: black;
+            pointer-events: none;
+            transition: .5s;
+            padding-top: 6px;
+        }
+        .inputBox input:focus ~ label,
+        .inputBox input:valid ~ label
+        {
+            top:-12px;
+            left:4px;
+            font-size: 14px;
+            color: dodgerblue;
+        }
+        .required {
+            text-align:center;
+            color:red;
+        }
+        .success {
+            color: #3c930d;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .danger{
+        margin-left:35%;
+        background-color:#f5fff3;
+        }
+
+        .available {
+            margin-left: 60%;
+            margin-top: -20%;
+            font-weight: 600;
+            font-size: 12px;
+            background-color: #f5fff3;
+        }
+
+        .disable {
+                    margin-left: 75%;
+                    margin-top: -20%;
+                    font-weight: 600;
+                    font-size: 14px;
+                    background-color: #f5fff3;
+                }
+
+        .backButton {
+            margin-top: -19%;
+            margin-left: 43%;
+            background-color: #f5fff3;
+        }
+
+         #myProButton {
+             margin-left: 80%;
+             /* text-align: right; */
+             margin-top: -5%;
+         }
+
+         label.label1 {
+             margin-left: 5%;
+             font-size: medium;
+             font-weight: 400;
+         }
+
+         #productName {
+             width: 100px;
+             margin-left: 4%;
+             margin-top: 0%;
+         }
+
+         .dropdown .padding {
+             padding-bottom: 14px;
+         }
+
+         .inputBox .col-md-12 .qty {
+             padding-bottom: 21px;
+         }
+
+        #quantity {
+             padding-bottom: -1px;
+             margin-left: 11rem;
+             margin-top: .3rem;
+             width: 40px;
+         }
+
+
+         .cost {
+             padding-bottom: 3px;
+             margin-top: 1rem;
+         }
+
+         label.pqty {
+             margin-top: 0rem;
+         }
+
+          .describe {
+             margin-top: 1rem;
+         }
+
+         #proname{
+         display:none;
+         }

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Borrow My Products</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Fontawesome CSS -->
+    <link th:href="@{/css/all.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/style1.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top">
+
+    <div class="container"><h3>BorrowMyProducts</h3>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/mainPage}">Home</a>
+                </li>
+                <li class="nav-item">
+
+                    <a class="nav-link" th:href="@{/}">Logout</a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container services-bar">
+    <div class="row">
+
+        <h5 th:if="${noProducts}">You haven't requested any product yet!</h5>
+        <div class="col-lg-4 mb-4" th:each="user : ${productRequests}">
+            <div class="card h-100">
+                <h4 class="card-header" th:text="${user.product.productName}"></h4>
+                <div class="card-img text-center">
+                    <img class="img-fluid"
+                         style="height:250px;margin-top: 20px; margin-left: 10px; margin-right: 10px; width: 225px; "
+                         th:src="@{${user.product.image}}" alt=""/>
+                </div>
+                <div class="card-body">
+                    <p class="card-text" th:text="${'Description:'+user.product.productDescription}"></p>
+                    <p class="card-text" th:text="${'Cost:'+user.product.productCost}"></p>
+
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary" th:text="${user.status}"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<script type="text/javascript" th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

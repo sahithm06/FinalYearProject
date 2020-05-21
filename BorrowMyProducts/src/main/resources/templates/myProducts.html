@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Borrow My Products </title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Fontawesome CSS -->
+    <link th:href="@{/css/all.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/style1.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+    <script type="text/javascript" th:src="@{js/login.js}"></script>
+
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top">
+
+    <div class="container"><h3>BorrowMyProducts</h3>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/mainPage}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" href="#myModal1">AddProduct</a>
+                </li>
+                <li class="nav-item">
+
+                    <a class="nav-link" th:href="@{/}">Logout</a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container services-bar">
+    <div class="row">
+        <h5 th:if="${noProducts}">You haven't added any products yet!</h5>
+
+        <p class="required error" style="color:red" th:if="${locationError}">Location must be given</p>
+
+
+        <div class="col-lg-4 mb-4" th:each="product : ${products}">
+            <div class="card h-100">
+                <div>
+                <h4 class="card-header" th:text="${product.productName}"></h4>
+                    <a th:href="@{/makeAvailableOrDisable/{id}(id=${product.productId})}"
+                       class="btn btn-outline-warning disable"
+                       onclick="if(!(confirm('Are you sure you want to Disable? If Disabled, other users cannot view your product ')))
+	             return false">Disable</a>
+                </div>
+                <div class="card-img text-center">
+                    <img class="img-fluid"
+                         style="margin-top: 20px; margin-left: 10px; margin-right: 10px; height:250px;width: 225px; "
+                         th:src="@{${product.image}}" alt=""/>
+                </div>
+                <div class="card-body">
+                    <p class="card-text" th:text="${'Description: '+product.productDescription}"></p>
+                    <p class="card-text" th:text="${'Cost(per Day) : Rs '+product.productCost}"></p>
+
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/seeRequests/{id}(id=${product.productId})}" class="btn btn-primary">SeeRequest</a>
+                    <a th:href="@{/delete/{id}(id=${product.productId})}" class="btn btn-outline-danger danger" onclick="if(!(confirm('Are you sure you want to Delete? Once deleted you cannot retrieve back the requests')))
+	             return false">Delete</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4" th:each="product : ${soldProducts}">
+            <div class="card h-100">
+                <div>
+                <h4 class="card-header" th:text="${product.productName}"></h4>
+                    <a th:href="@{/makeAvailableOrDisable/{id}(id=${product.productId})}"
+                       class="btn btn-outline-success available"
+                       onclick="if(!(confirm('Are you sure you want to Restore the product ')))
+	             return false">Make Available</a>
+                </div>
+                <div class="card-img text-center">
+                    <img class="img-fluid"
+                         style="margin-top: 20px; margin-left: 10px; margin-right: 10px; height:250px;width: 225px; "
+                         th:src="@{${product.image}}" alt=""/>
+                </div>
+                <div class="card-body">
+                    <p class="card-text" th:text="${'Description: '+product.productDescription}"></p>
+                    <p class="card-text" th:text="${'Cost(per Day) : Rs '+product.productCost}"></p>
+
+                </div>
+                <div class="card-footer">
+                    <a  class="btn btn-danger">Solded Out</a>
+                    <a th:href="@{/delete/{id}(id=${product.productId})}" class="btn btn-outline-danger danger" onclick="if(!(confirm('Are you sure you want to Delete your product?')))
+	             return false">Delete</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-4 mb-4" th:each="product : ${disabledProducts}">
+            <div class="card h-100">
+                <div>
+                    <h4 class="card-header" th:text="${product.productName}"></h4>
+                    <a th:href="@{/makeAvailableOrDisable/{id}(id=${product.productId})}"
+                       class="btn btn-outline-success available"
+                       onclick="if(!(confirm('Are you sure you want to Restore the product ')))
+	             return false">Make Available</a>
+                </div>
+                <div class="card-img text-center">
+                    <img class="img-fluid"
+                         style="margin-top: 20px; margin-left: 10px; margin-right: 10px; height:250px;width: 225px; "
+                         th:src="@{${product.image}}" alt=""/>
+                </div>
+                <div class="card-body">
+                    <p class="card-text" th:text="${'Description: '+product.productDescription}"></p>
+                    <p class="card-text" th:text="${'Cost(per Day) : Rs '+product.productCost}"></p>
+
+                </div>
+                <div class="card-footer">
+                    <a  class="btn btn-warning">Disabled</a>
+                    <a th:href="@{/delete/{id}(id=${product.productId})}" class="btn btn-outline-danger danger" onclick="if(!(confirm('Are you sure you want to Delete your product?')))
+	             return false">Delete</a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel1">Product Form</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row ">
+                        <div class="col-md-12 pl-3 py-5 border" style="background:white">
+                            <form action="#" th:action="@{/addProduct}" th:object="${product}" method="post">
+                                <div class="form-row">
+                                    <div class=" dropdown padding">
+                                        <label class="label1">Product Name<span class="required "> *</span></label>
+                                        <select  id="productName" th:field="${product.productName}" name="productName"
+                                                 required onchange="proName()" >
+                                                <option value="Mobile Phone">Mobile</option>
+                                                <option value="Laptop">Laptop</option>
+                                                <option value="Tv">Telivision</option>
+                                                <option value="Smart Watch">Smart Watch</option>
+                                                <option value="other">other</option>
+                                        </select>
+
+                                        <input id="proname" th:field="${product.manualProductName}" name="manualProductName"
+                                               class="form-control " type="text" placeholder="Please enter the product name"  >
+
+
+                                    </div>
+                                    <div class="inputBox col-md-12 cost">
+                                        <input id="productCost" th:field="${product.productCost}" name="productCost"
+                                               class="form-control" type="text"  required>
+                                        <label>Product Cost (/per day in RS)<span class="required"> *</span></label>
+
+                                    </div>
+                                    <div class="inputBox col-md-12 qty">
+                                        <label class="pqty">Product Quantity<span class="required"> *</span></label>
+
+                                        <select id="quantity" th:field="${product.quantity}">
+                                            <option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}" th:text="${i}">
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                    <div class="inputBox col-md-12 describe">
+                                        <input id="productDescription" th:field="${product.productDescription}"
+                                               name="productDescription" class="form-control" type="text" required>
+                                        <label>Product Description<span class="required"> *</span></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="image">Select image</label>
+                                        <input type="file" th:field="${product.image}" name="image"
+                                               class="form-control-file" id="image">
+                                    </div>
+                                    <div class="dropdown">
+                                        <select id="category" name="category" th:field="${category.categoryName}">
+                                            <option value="Electronic Devices">Electronic Devices</option>
+                                            <option value="Home Appliances">Home Appliances</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-8">
+                                        <input type="checkbox" id="location" onclick="getLocation(); allowLocation();">
+                                        Allow location
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="inputBox col-md-4">
+                                        <input id="latitude" th:field="${location.latitude}" name="latitude" type="text"
+                                               hidden>
+                                    </div>
+                                    <div class="inputBox col-md-4">
+                                        <input id="longitude" th:field="${location.longitude}" name="longitude"
+                                               type="text" hidden>
+                                    </div>
+                                </div>
+                                <div class="form-row" style="padding-left:40%">
+                                    <input type="submit" disabled id="btn" value="SUBMIT" class="btn btn-success">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+        function proName()
+       {
+            console.log("executing ");
+            var val=document.getElementById("productName").value;
+            if(val == "other" )
+            {
+                console.log("displaying");
+                document.getElementById("proname").style.display="block";
+            }
+            else
+            {
+                console.log("hidding");
+                document.getElementById("proname").style.display="none";
+            }
+
+        }
+
+
+    </script>
+
+<script type="text/javascript" th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

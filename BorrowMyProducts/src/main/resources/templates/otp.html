@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>otp</title>
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQtZO2wu2x-xu46iUptwBI6tvIlUv5_G7RE6yaYxIQpRG-vrX5-&usqp=CAU'); background-size: 100% 100%;">
+<section class="testimonial" id="testimonial" style="padding:8% 0 8% 0">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-2"></div>
+            <div class="card bg-dark col-md-4 py-5 text-white text-center">
+                <img class="card-img-top"
+                     src="https://cdn.windowsreport.com/wp-content/uploads/2018/03/ecommerce-2140604_1920.jpg"
+                     alt="Card image">
+                <div class="card-body">
+                    <h5 class="card-title">BorrowMyProducts</h5>
+                    <h5 class="card-title">Lend here to Earn and Rent here to Save</h5>
+                    <p class="card-text">In this website the you can either lend or rent the products which are near to
+                        his location.</p>
+                </div>
+            </div>
+            <div class="col-md-4 pl-3 py-5 border" style="background-color: white;">
+                <h5 class="pb-4">Enter Otp for Verification</h5>
+                <form action="#" th:action="@{/verifyOtp}" th:object="${user}" method="POST">
+                    <p th:if="${invalidOtp}" class="required">Invalid Otp</p>
+                    <div class="form-row">
+                        <div class="inputBox col-md-8">
+                            <input type="text" id="otp" name="otp" oninput="stoppedTyping()" class="form-control"
+                                   required>
+                            <label>Otp<span class="required"> *</span></label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div>Time left = <span id="timer"></span></div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <input type="submit" disabled id="btn" value="Verify" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" th:src="@{/js/otp.js}"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+    <script type="text/javascript" th:src="@{js/login.js}">
+    </script>
+</head>
+<body style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQtZO2wu2x-xu46iUptwBI6tvIlUv5_G7RE6yaYxIQpRG-vrX5-&usqp=CAU'); background-size: 100% 100%;">
+<section class="testimonial" id="testimonial" style="padding:8% 0 8% 0">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-2"></div>
+            <div class="card bg-dark col-md-4 py-5 text-white text-center">
+                <img class="card-img-top"
+                     src="https://cdn.windowsreport.com/wp-content/uploads/2018/03/ecommerce-2140604_1920.jpg"
+                     alt="Card image">
+                <div class="card-body">
+                    <h5 class="card-title">BorrowMyProducts</h5>
+                    <h5 class="card-title">Lend here to Earn and Rent here to Save</h5>
+                    <p class="card-text">In this website the you can either lend or rent the products which are near to
+                        his location.</p>
+                </div>
+            </div>
+            <div class="col-md-4 pl-3 py-5 border" style="background-color: white;">
+                <h4 class="pb-4">Login Form</h4>
+
+                <form class="border border-light " th:action="@{/authenticateTheUser}" method="POST">
+                    <p class="required" th:if="${param.error}">UserName or Password is wrong</p>
+                    <p class="success" th:if="${success}">Successfully Registered ,Please login </p>
+
+                    <div class="form-row">
+                        <div class="inputBox col-md-8">
+                            <input type="email" name="username" class="form-control" aria-describedby="emailHelp"
+                                   required>
+
+                            <label>UserName<span class="required"> *</span></label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="inputBox col-md-8">
+                            <input name="password" value="" class="form-control" required="required" type="password">
+                            <label>Password<span class="required"> *</span></label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-8">
+                            <input type="checkbox" onclick="myFunction()"> Show Password
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <input type="submit" id="login_btn" value="Login" class="btn btn-success">
+                    </div>
+                </form>
+                <br>
+                <p>If account does not exits <a th:href="@{/signup}">signup </a>here</p>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

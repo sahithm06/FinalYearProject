@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Borrow My Products</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Fontawesome CSS -->
+    <link th:href="@{/css/all.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/style1.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top">
+
+    <div class="container"><h3>BorrowMyProducts</h3>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/mainPage}">Home</a>
+                </li>
+                <li class="nav-item">
+
+                    <a class="nav-link" th:href="@{/}">Logout</a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="col-md-12 pl-3 py-5 border" style="background:white">
+
+        <h5 th:if="${noProducts}">No requests yet!</h5>
+        <div>
+        <a th:href="@{/myProducts}" id="myProButton" class="btn btn-outline-primary backButton ">Go Back To Your Products </a>
+        </div>
+        <div th:each="product:${productRequests}">
+            <div class="row">
+                <div class="col-md-6">
+                    <p style="font-size:20px" th:text="${'UserName:'+product.user.userFirstName}"></p>
+                    <p style="font-size:20px" th:text="${'Mobile Number'+product.user.phone}"></p>
+
+                </div>
+                <div col="col-md-6">
+                    <a th:href="@{/accepted/{proId}/{userId}(proId=${product.product.productId},userId=${product.user.userId})}"
+                       class="btn btn-success" onclick="if(!(confirm('Are you sure you want to Accept? Once accepted your product will be sold out')))
+	             return false"> Accept</a>
+
+                    <a th:href="@{/reject/{proId}/{userId}(proId=${product.product.productId},userId=${product.user.userId})}"
+                       class="btn btn-danger" onclick="if(!(confirm('Are you sure, you want to reject it? once rejected you cant see this request again.')))
+	             return false">Reject</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+<script type="text/javascript" th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

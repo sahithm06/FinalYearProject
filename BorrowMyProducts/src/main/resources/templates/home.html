@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Borrow My Products</title>
+    <!-- Bootstrap core CSS -->
+    <link type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Fontawesome CSS -->
+    <link type="text/css" th:href="@{/css/all.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link type="text/css" th:href="@{/css/style1.css}" rel="stylesheet">
+    <style>
+        li.mail {
+    color: #000000;
+    margin-left: 1rem;
+    font-size: 17px;
+    padding-top: 0.45rem;
+}
+    </style>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top">
+
+    <div class="container"><h3>BorrowMyProducts</h3>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/myProducts}">MyProducts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/myRequests}">MyRequests</a>
+                </li>
+                <li class="nav-item">
+
+                    <a class="nav-link" th:href="@{/}">Logout</a>
+
+                </li>
+                <li class="mail">
+                    <p th:text="${user.name}"></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel1">Category Form</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 pl-3 py-5 border" style="background:white">
+                            <form action="#" th:action="@{/addCategory}" th:object="${category}" method="post">
+                                <div class="form-row">
+                                    <div class="inputBox col-md-12">
+                                        <input id="categoryName" name="categoryName" class="form-control" type="text"
+                                               required>
+                                        <label>Category Name<span class="required"> *</span></label>
+                                    </div>
+                                </div>
+                                <div class="form-row" style="padding-left:40%">
+                                    <input type="submit" value="submit" class="btn btn-success">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<header class="slider-main">
+    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <!-- Slide One - Set the background image for this slide in the line below -->
+            <div class="carousel-item active" style="background-image: url('/images/image4.png')">
+                <div class="carousel-caption d-none d-md-block">
+                </div>
+            </div>
+            <!-- Slide Two - Set the background image for this slide in the line below -->
+            <div class="carousel-item" style="background-image: url('/images/images3.jpg')">
+                <div class="carousel-caption d-none d-md-block">
+                </div>
+            </div>
+            <!-- Slide Three - Set the background image for this slide in the line below -->
+            <div class="carousel-item" style="background-image: url('/images/image5.png')">
+                <div class="carousel-caption d-none d-md-block">
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</header>
+<!-- Page Content -->
+<div class="container">
+    <div class="portfolio-main">
+        <h2>Categories</h2>
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 portfolio-item" th:each="cat:${categories}">
+                <div class="card h-100">
+                    <div class="card-img">
+                        <img class="card-img-top" th:src="@{${cat.image}}" alt=""/>
+                        <div class="overlay"><i class="fas fa-arrows-alt"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a th:href="@{/category/{id}(id=${cat.categoryName})}" th:text="${cat.categoryName}"></a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <hr>
+
+</div>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

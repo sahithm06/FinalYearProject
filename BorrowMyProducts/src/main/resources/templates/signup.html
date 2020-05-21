@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>signup</title>
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{js/signup.js}"></script>
+    <script type="text/javascript" th:src="@{js/login.js}"></script>
+</head>
+<body style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQtZO2wu2x-xu46iUptwBI6tvIlUv5_G7RE6yaYxIQpRG-vrX5-&usqp=CAU'); background-size: 100% 100%;">
+<section class="testimonial py-5" id="testimonial">
+    <div class="container">
+        <div class="row ">
+            <div class="card bg-dark col-md-4 py-5 text-white text-center">
+                <img class="card-img-top"
+                     src="https://cdn.windowsreport.com/wp-content/uploads/2018/03/ecommerce-2140604_1920.jpg"
+                     alt="Card image">
+                <div class="card-body">
+                    <h5 class="card-title">BorrowMyProducts</h5>
+                    <h5 class="card-title">Lend here to Earn and Rent here to Save</h5>
+                    <p class="card-text">In this website the you can either lend or rent the products which are near to
+                        his location.</p>
+                </div>
+            </div>
+            <div class="col-md-8 pl-3 py-5 border" style="background:white">
+                <h4 class="pb-4">Registration</h4>
+                <form action="#" th:action="@{/signup}" th:object="${user}" method="post">
+                    <p class="required error" th:if="${passwordError}">Passwords didn't match</p>
+                    <p class="required error" th:if="${EmailExists}">User Email already Exits </p>
+                    <p class="required error" th:if="${phoneExists}">User Phone Number already Exits </p>
+                    <p class="required error" th:if="${locationError}">Location must be given</p>
+
+                    <div class="form-row">
+                        <div class="inputBox col-md-6">
+                            <input id="firstName" oninput="stoppedTyping()" name="firstName"
+                                   th:field="${user.userFirstName}" class="form-control" type="text" required>
+                            <label>First Name<span class="required"> *</span></label>
+                        </div>
+                        <div class="inputBox col-md-6">
+                            <input id="lastName" oninput="stoppedTyping()" name="lastName"
+                                   th:field="${user.userLastName}" class="form-control" type="text" required>
+                            <label>Last Name<span class="required"> *</span></label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="inputBox col-md-6">
+                            <input type="email" id="email" oninput="stoppedTyping()" name="email"
+                                   th:field="${user.email}" class="form-control" aria-describedby="emailHelp" required>
+                            <label>Email<span class="required"> *</span></label>
+                            <p th:if="${emailError}" class="required">Invalid email</p>
+                        </div>
+                        <div class="inputBox col-md-6">
+                            <input id="phoneNo" oninput="stoppedTyping()" name="phoneNo" th:field="${user.phone}"
+                                   class="form-control" type="text" required pattern="[+][0-9]{12}">
+                            <label>Mobile No<span class="required"> *</span></label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="inputBox col-md-6">
+                            <input type="password" oninput="stoppedTyping()" id="password" name="password"
+                                   th:field="${user.password}" class="form-control" required>
+                            <label>Password<span class="required"> *</span></label>
+                        </div>
+                        <div class="inputBox col-md-6">
+                            <input type="password" oninput="stoppedTyping()" th:field="${user.confirmPassword}"
+                                   id="confirmPassword" name="confirmPassword" class="form-control" required>
+                            <label>Confirm Password<span class="required"> *</span></label>
+                            <!--                            <p th:if="${passwordError}" class="required">Password and confirm password should be same</p>-->
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <input type="checkbox" onclick="myFunction()"> Show Password
+                        </div>
+                        <div class="col-md-6">
+                            <input type="checkbox" onclick="myFunction1()"> Show Password
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="inputBox col-md-4">
+                            <input id="doorNo" oninput="stoppedTyping()" name="DoorNo" th:field="${address.houseNo}"
+                                   class="form-control" type="text" required>
+                            <label>House No<span class="required"> *</span></label>
+                        </div>
+                        <div class="inputBox col-md-4">
+                            <input id="streetNo" oninput="stoppedTyping()" name="DoorNo" th:field="${address.streetNo}"
+                                   class="form-control" type="text" required>
+                            <label>Street No<span class="required"> *</span></label>
+                        </div>
+                        <div class="inputBox col-md-4">
+                            <input id="city" oninput="stoppedTyping()" name="city" th:field="${address.city}"
+                                   class="form-control" type="text" required>
+                            <label>City<span class="required"> *</span></label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="inputBox col-md-4">
+                            <input id="state" oninput="stoppedTyping()" name="state" class="form-control"
+                                   th:field="${address.state}" type="text" required>
+                            <label>State<span class="required"> *</span></label>
+                        </div>
+                        <div class="inputBox col-md-4">
+                            <input id="country" oninput="stoppedTyping()" name="country" th:field="${address.country}"
+                                   class="form-control" type="text" required>
+                            <label>Country<span class="required"> *</span></label>
+                        </div>
+                        <div class="inputBox col-md-4">
+                            <input id="pincode" oninput="stoppedTyping()" name="pincode" class="form-control"
+                                   th:field="${address.zipCode}" type="text" required pattern="[0-9]{6}">
+                            <label>Pincode<span class="required"> *</span></label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-8">
+                            <input type="checkbox" id="location" onclick="getLocation(); stoppedTyping();"> Allow
+                            location
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="inputBox col-md-4">
+                            <input id="latitude" th:field="${address.latitude}" name="latitude" type="text"
+                                   hidden>
+                        </div>
+                        <div class="inputBox col-md-4">
+                            <input id="longitude" th:field="${address.longitude}" name="longitude"
+                                   type="text" hidden>
+                        </div>
+                    </div>
+                    <div class="form-row" style="padding-left:40%">
+                        <input type="submit" disabled id="reg_btn" value="Register" class="btn btn-success">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
